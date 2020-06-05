@@ -13,11 +13,6 @@ function Doorboard(props) {
 
 
     const info = [{
-        level_number : 21,
-        unlocked_by : null,
-        current : false,
-        point : 300
-    },{
         level_number : 20,
         unlocked_by : null,
         current : false,
@@ -137,16 +132,19 @@ function Doorboard(props) {
         (async () => {
             let res = await get(`${API_ROOT}leaderboard`);
             console.log(res);
-            res.forEach(r => {
-                setDoor(doorInfo => {
-                    return doorInfo.map(x=>{
-                        if(x.level_number === r.level_number){
-                            x.unlocked_by = r.unlocked_by;
-                        }
-                        return x;
-                    })
+            if (res !== undefined) {
+                res.forEach(r => {
+                    setDoor(doorInfo => {
+                        return doorInfo.map(x => {
+                            if (x.level_number === r.level_number) {
+                                x.unlocked_by = r.unlocked_by;
+                                x['img'] = r.profile_picture;
+                            }
+                            return x;
+                        })
+                    });
                 });
-            });
+            }
         })();
     }, [cont]);
 
@@ -159,7 +157,7 @@ function Doorboard(props) {
                   });
             }
         }
-    }, [props.bor])
+    }, [props.bor]);
 
     return(
         <div ref={mainDiv} id="door-board" className={`bor cursor-default ${props.bor ? "bor-tra" : ""}`}>
@@ -169,11 +167,11 @@ function Doorboard(props) {
             {doorInfo.map(x => {
                 if(x.current){
                     return(
-                        <Doorinfo refer={subDiv} key={x.level_number} isOpen={x.unlocked_by} door={x.level_number} point={x.point} current={x.current} bor={props.bor} />
+                        <Doorinfo refer={subDiv} key={x.level_number} isOpen={x.unlocked_by} img={x.img ? x.img : null} door={x.level_number} point={x.point} current={x.current} bor={props.bor} />
                     )
                 }
                 return (
-                    <Doorinfo key={x.level_number} isOpen={x.unlocked_by} door={x.level_number} point={x.point} current={x.current} bor={props.bor} />
+                    <Doorinfo key={x.level_number} isOpen={x.unlocked_by} img={x.img ? x.img : null} door={x.level_number} point={x.point} current={x.current} bor={props.bor} />
                 )
             })}
         </div>

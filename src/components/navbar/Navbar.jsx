@@ -1,10 +1,13 @@
 import './Navbar.scss';
 import React, {useEffect, useState} from 'react';
-//import {getProfile} from '../../auth0/auth0';
+import { logout } from '../../auth0/auth0';
 import {get} from '../../auth0/http';
 import {API_ROOT} from '../../auth0/api_config';
 
 function Navbar(props) {
+    const [isOpen,setIsOpen] = useState(false);
+    const toggleOpen = () => setIsOpen(!isOpen );
+    const menuClass = `dropdown-menu${isOpen ? " show" : ""}`;
     const [user, setUser] = useState({
         name : null,
         image : null
@@ -15,7 +18,8 @@ function Navbar(props) {
         if (res) {
           setUser({
             name : res.name,
-            image : res.profile_picture
+            image : res.profile_picture, 
+              score: res.score
           })
         }
       })();
@@ -36,11 +40,20 @@ function Navbar(props) {
                 <img src={require('../../assets/images/logo.png')} className="d-inline-block align-top logo" alt="" />
             </a>
             <div id="user-info" className="d-flex">
-                <p className="score tex">MY SCORE : {props.score}</p>
+                <p className="score tex">My Score : <span style={{fontWeight:500}}>{user.score}</span></p>
                 <div className="d-flex">
                     <p className="name tex">{user.name}</p>
-                    <img src={user.image} className="d-inline-block align-top prof-img" alt="" />
-                </div>
+                    <div className="dropdown border-0">
+                        <button style={{boxShadow:"none"}} className="btn btn-default dropdown-toggle" onClick={toggleOpen} type="button" id="menu1"
+                                data-toggle="dropdown">
+                        <img src={user.image} className="d-inline-block align-top prof-img" alt="" />
+                            <span className="caret"> </span>
+                        </button>
+                        <div className={"dropdown-menu box-logout dropdown-menu-right "+menuClass} aria-labelledby="dropdownMenuButton">
+                            <a onClick={logout} className="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </div>
+                    </div>
             </div>
         </nav>
     );

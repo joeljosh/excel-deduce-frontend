@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
-import {Context} from "../../context/context";
+import { Context } from "../../context/context";
 import { post } from "../../auth0/http";
 import { API_ROOT } from "../../auth0/api_config";
 import "./Answer.scss";
 
-function Answer(props) {
 
+function Answer(props) {
   const cont = useContext(Context);
 
   const [text, setText] = useState("");
@@ -24,9 +24,14 @@ function Answer(props) {
         if (!res.correct_answer) {
           cont.Alert("Wrong answer!");
         } else {
+          console.log(res);
+          localStorage.setItem(
+            "level_number",
+            parseInt(localStorage.getItem("level_number")) + 1
+          );
+          cont.setIsSolve(true);
           cont.Alert("Correct answer!");
           props.toggle();
-          //setTimeout(() => window.location.reload(), 2000);
         }
       }
     })();
@@ -89,8 +94,12 @@ function Answer(props) {
         onChange={(e) => setText(e.target.value)}
         type="text"
         className="t-box"
-      ></input>
-      <button className="sub butt" onClick={() => click()}></button>
+      >
+
+      </input>
+      <button className="sub butt" onClick={() => click()}>
+
+      </button>
       <div className="inpp">
         {list}
         <button className="enter butt" onClick={() => click()}>
