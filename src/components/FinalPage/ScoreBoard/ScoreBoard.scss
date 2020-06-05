@@ -1,14 +1,14 @@
 .score-flex{
   display: flex;
   position: absolute;
-  left:80%;
+  left:50%;
   flex-wrap: nowrap;
   flex-direction: column;
   top:55%;
   transform: translateX(-50%) translateY(-50%);
   animation: increaseHeight;
-  animation-duration: 1s;
-  animation-delay: 4s;
+  animation-duration: 3s;
+  animation-delay: 2s;
   animation-fill-mode: both;
   animation-timing-function: ease-in;
 }
@@ -16,7 +16,7 @@
 .score-heading{
   color: #f9d343;
   position: absolute;
-  left:calc(65% + 15vw);
+  left:calc(50% );
   top: 10%;
   transform: translateX(-50%);
   font-size: 3vh;
@@ -41,7 +41,7 @@
   //animation: increaseWidth;
   //animation-duration: 0.5s;
   //animation-fill-mode: both;
-  animation-delay: 3.5s;
+  animation-delay: 5s;
   height: 16vh;
   animation-timing-function: ease-in;
 }
@@ -61,7 +61,12 @@
     overflow: hidden;
     height: 16vh;
   }
-  50%{
+  10%{
+    width:30vw;
+    overflow: hidden;
+    height: 16vh;
+  }
+  90%{
     width:30vw;
     overflow: hidden;
     height: 16vh;
