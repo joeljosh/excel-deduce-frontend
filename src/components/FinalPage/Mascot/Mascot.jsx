@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Avatar from '../../../assets/images/mascot.png'
 import './Mascot.scss'
+import GIF from '../../../assets/images/confetti.gif'
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
 
 
@@ -9,12 +10,9 @@ const Mascot  = () => {
 
     return(
         <>
-
             <div className={" avatar-cover position-relative"}>
-            {starts &&
-                <img src={Avatar} className={"avatar"} alt=""/>
-            }
-            <ScoreBoard start={starts} setStart={setStarts} />
+                <img src={GIF} className={'gif-popper'} alt=""/>
+                <ScoreBoard start={starts} setStart={setStarts} />
             </div>
         </>
     )

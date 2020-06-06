@@ -19,16 +19,16 @@ function Answer(props) {
       } else {
         let res = await post(`${API_ROOT}answer`, {
           answer: text,
-          level_number: level_number,
+          level_number: cont.level,
         });
         if (!res.correct_answer) {
           cont.Alert("Wrong answer!");
         } else {
           console.log(res);
-          localStorage.setItem(
-            "level_number",
-            parseInt(localStorage.getItem("level_number")) + 1
-          );
+          // localStorage.setItem(
+          //   "level_number",
+          //   parseInt(localStorage.getItem("level_number")) + 1
+          // );
           cont.setIsSolve(true);
           cont.Alert("Correct answer!");
           props.toggle();

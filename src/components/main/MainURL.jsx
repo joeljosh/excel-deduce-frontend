@@ -19,9 +19,12 @@ import { API_ROOT } from "../../auth0/api_config";
 import { Context } from "../../context/context";
 import db from "../firebase";
 import "./Main.scss";
-import history from "../../utils/history";
+import {Redirect} from 'react-router-dom'
+import { useParams , useHistory } from "react-router-dom";
 
-function Main(props) {
+function MainURL(props) {
+  let {levelParam} = useParams();
+  const history = useHistory();
   const cont = useContext(Context);
   const [level, setLevel] = useState({
     level_number: null,
@@ -86,20 +89,18 @@ function Main(props) {
 
   useEffect(() => {
     //Effect callbacks are synchronous to prevent race conditions
-    (async () => {
-      let res = await get(`${API_ROOT}question`);
-      console.log(res);
-      if (res) {
-        setLevel(res);
-        if(res.level_number > 20){
-          history.push('/final')
+      (async () => {
+        let resp = await get(`${API_ROOT}question`);
+        if (resp) {
+          localStorage.setItem("level_number", resp.level_number);
         }
-        localStorage.setItem("level_number", res.level_number);
-        cont.setLevel(res.level_number);
-      }
+        let res = await get(`${API_ROOT}getlevel?level=${levelParam}`);
+        console.log(res);
+        if (res) {
+          setLevel(res);
+          cont.setLevel(res.level_number);
+        }
     })();
-
-    console.log("say 1");
 
     window.addEventListener("resize", () => {
       if (document.fullscreen) {
@@ -119,10 +120,9 @@ function Main(props) {
         console.log("cuuent levle", currLevel);
         console.log("say 2");
         if (currLevel !== undefined && currLevel !== null) {
-          if (k !== currLevel && data.val().user !== profile.email) {
+          if (k !== currLevel) {
             localStorage.setItem("level_number", data.val().level);
-            cont.Alert("Someone already solved this level!");
-            window.location.reload()
+            cont.Alert("Someone solved a level!");
             // cont.Alert("Someone already solved this level!", 3000); //for reloading after 3s.
             // Give some better visual feedback to user and reload page after a small delay to get new level
           }
@@ -131,6 +131,10 @@ function Main(props) {
     });
     return () => curr_lev_ref.off("value");
   }, [profile]);
+
+  if(parseInt(localStorage.getItem('level_number')) <= levelParam){
+    return <Redirect from={`/game/${levelParam}`} to={'/game'}/>
+  }
 
   return (
     <div id="main">
@@ -238,27 +242,27 @@ function Main(props) {
             </div>
           )}
         </div>
-        {cont.level !== 20 &&
-          <div id="door">
-            <div className={cont.isSolve ? "d-img-op" : "d-img"}>
-              {cont.isSolve && (
-                  <div className={"position-absolute arrow-img"}>
-                    <img
-                        onClick={() => window.location.reload()}
-                        src={Arrow}
-                        alt=""
-                    />
-                  </div>
-              )}
-              <div
-                  className="d-lock cursor-pointer"
-                  onClick={() => answer()}
-              >
-
+        <div id="door">
+          <div className={cont.isSolve ? "d-img-op" : "d-img"}>
+            {cont.isSolve && (
+              <div className={"position-absolute arrow-img"}>
+                <img
+                  onClick={() =>
+                  {
+                    history.push(`/game/${cont.level+1}`);
+                    window.location.reload()
+                  }}
+                  src={Arrow}
+                  alt=""
+                />
               </div>
-            </div>
+            )}
+            <div
+              className="d-lock cursor-pointer"
+              onClick={() => answer()}
+            ></div>
           </div>
-        }
+        </div>
         <div id="photo" className="d-flex">
           {level.level_file_2 && (
             <Imagebox photo={photo} image={level.level_file_2} />
@@ -272,4 +276,4 @@ function Main(props) {
   );
 }
 
-export default Main;
+export default MainURL;

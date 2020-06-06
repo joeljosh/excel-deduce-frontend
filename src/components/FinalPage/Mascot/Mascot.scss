@@ -42,3 +42,30 @@
   height: 100vh;
   width: 100vw;
 }
+
+.gif-popper{
+  position: absolute;
+  height: 100vh;
+  animation: disappear;
+  transition: all 1s ease-in;
+  animation-duration: 5s;
+  animation-timing-function: ease-out;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+  display: none!important;
+}
+
+@keyframes disappear{
+  0%{
+    display: none;
+  }
+  25%{
+    display: block;
+  }
+  80%{
+    display: block;
+  }
+  100%{
+    display: none;
+  }
+}

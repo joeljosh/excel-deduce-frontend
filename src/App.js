@@ -15,6 +15,7 @@ import Landing from "./components/Landing/Landing";
 import { API_ROOT } from "./auth0/api_config";
 import FinalPage from "./components/FinalPage/FinalPage";
 import { get } from "./auth0/http";
+import MainURL from "./components/main/MainURL";
 
 function App() {
   const [screen, setScreen] = useState(true);
@@ -46,6 +47,20 @@ function App() {
               )
             }
           />
+            <Route
+                exact
+                path="/game/:levelParam"
+                render={() =>
+                    checkAuth() ? (
+                        <React.Fragment>
+                            <Navbar/>
+                            <MainURL />
+                        </React.Fragment>
+                    ) : (
+                        <Redirect to="/login" />
+                    )
+                }
+            />
           <Route exact path="/login" render={() => login()} />
           <Route
             exact

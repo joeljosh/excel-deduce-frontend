@@ -118,7 +118,7 @@ function Doorboard(props) {
     const subDiv = useRef();
    
     useEffect(()=>{
-        let currLevel = localStorage.getItem("level_number");
+        let currLevel = cont.level;
         setDoor(doorInfo => {
             return doorInfo.map(x=>{
                 if(x.level_number === parseInt(currLevel)){
