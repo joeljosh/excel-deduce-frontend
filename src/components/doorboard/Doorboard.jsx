@@ -131,6 +131,7 @@ function Doorboard(props) {
         });
         (async () => {
             let res = await get(`${API_ROOT}leaderboard`);
+            console.log("###############");
             console.log(res);
             if (res !== undefined) {
                 res.forEach(r => {
