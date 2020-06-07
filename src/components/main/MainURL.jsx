@@ -19,11 +19,11 @@ import { API_ROOT } from "../../auth0/api_config";
 import { Context } from "../../context/context";
 import db from "../firebase";
 import "./Main.scss";
-import {Redirect} from 'react-router-dom'
-import { useParams , useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 function MainURL(props) {
-  let {levelParam} = useParams();
+  let { levelParam } = useParams();
   const history = useHistory();
   const cont = useContext(Context);
   const [level, setLevel] = useState({
@@ -72,34 +72,32 @@ function MainURL(props) {
 
   const [profile, setProfile] = useState({});
 
-
   useEffect(() => {
     get(`${API_ROOT}user_info`).then((res) => {
       //console.log(res.email);
       if (res) {
         let p = {
           name: res.name,
-          email: res.email
+          email: res.email,
         };
-        setProfile({...p}
-        );
+        setProfile({ ...p });
       }
     });
   }, []);
 
   useEffect(() => {
     //Effect callbacks are synchronous to prevent race conditions
-      (async () => {
-        let resp = await get(`${API_ROOT}question`);
-        if (resp) {
-          localStorage.setItem("level_number", resp.level_number);
-        }
-        let res = await get(`${API_ROOT}getlevel?level=${levelParam}`);
-        //console.log(res);
-        if (res) {
-          setLevel(res);
-          cont.setLevel(res.level_number);
-        }
+    (async () => {
+      let resp = await get(`${API_ROOT}question`);
+      if (resp) {
+        localStorage.setItem("level_number", resp.level_number);
+      }
+      let res = await get(`${API_ROOT}getlevel?level=${levelParam}`);
+      //console.log(res);
+      if (res) {
+        setLevel(res);
+        cont.setLevel(res.level_number);
+      }
     })();
 
     window.addEventListener("resize", () => {
@@ -132,8 +130,23 @@ function MainURL(props) {
     return () => curr_lev_ref.off("value");
   }, [profile]);
 
-  if(parseInt(localStorage.getItem('level_number')) <= levelParam){
-    return <Redirect from={`/game/${levelParam}`} to={'/game'}/>
+  useEffect(() => {
+    const hintref = db.ref().child("new_hint");
+    hintref.on("value", (data) => {
+      if (data.val()) {
+        let currLevel = parseInt(localStorage.getItem("level_number"));
+        if (currLevel !== undefined && currLevel !== null) {
+          if (data.val().level !== currLevel) {
+            setLevel({ ...level, hints: [...level.hints, data.val().hint] });
+          }
+        }
+      }
+    });
+    return () => hintref.off("value");
+  }, [profile]);
+
+  if (parseInt(localStorage.getItem("level_number")) <= levelParam) {
+    return <Redirect from={`/game/${levelParam}`} to={"/game"} />;
   }
 
   return (
@@ -247,10 +260,9 @@ function MainURL(props) {
             {cont.isSolve && (
               <div className={"position-absolute arrow-img"}>
                 <img
-                  onClick={() =>
-                  {
-                    history.push(`/game/${cont.level+1}`);
-                    window.location.reload()
+                  onClick={() => {
+                    history.push(`/game/${cont.level + 1}`);
+                    window.location.reload();
                   }}
                   src={Arrow}
                   alt=""
