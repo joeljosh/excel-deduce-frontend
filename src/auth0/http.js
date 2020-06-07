@@ -38,10 +38,20 @@ export const post = (url, data) => {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${at}`
             }
-        }).then(res => res.json())
-            .catch(err => err)
+        }).then(res =>{
+                if(res.status === 401){
+                window.location.replace(`/login`)
+            } else {
+            return  res.json()
+            }}
+            )
+            .catch(err => {
+                if(err.status === 401){
+                    window.location.replace(`/login`)
+                }
+            })
     }
-}
+};
 
 export const get = url => {
     let at = checkAuth();
@@ -51,10 +61,18 @@ export const get = url => {
                 "Authorization": `Bearer ${at}`
             }
         })
-            .then(res => res.json())
-            .catch(err => console.log(err));
-    }
-};
+            .then(res => {
+                if(res.status === 401) {
+                    window.location.replace(`/login`)
+                }
+                return res.json()
+            })
+            .catch(err => {
+            if(err.status === 401){
+                window.location.replace(`/login`)
+            }
+    });
+}};
 
 export const getWithoutAuth = url => {
     return fetch(url)
