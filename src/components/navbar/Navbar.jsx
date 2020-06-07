@@ -46,7 +46,7 @@ function Navbar(props) {
     //      })
     //    }
     //  })
-    });
+    }, []);
     return(
         <nav className="navbar cursor-default nbar navbar-light d-flex">
             <div>
