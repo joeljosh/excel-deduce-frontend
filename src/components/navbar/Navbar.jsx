@@ -1,6 +1,7 @@
 import './Navbar.scss';
 import React, {useEffect, useState} from 'react';
 import { logout } from '../../auth0/auth0';
+import {useHistory} from 'react-router-dom'
 import {get} from '../../auth0/http';
 import {useParams} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -8,6 +9,7 @@ import {faDoorClosed, faDoorOpen, faArrowLeft} from '@fortawesome/free-solid-svg
 import {API_ROOT} from '../../auth0/api_config';
 
 function Navbar(props) {
+    const history = useHistory();
     let {levelParam} = useParams();
     const [isOpen,setIsOpen] = useState(false);
     const toggleOpen = () => setIsOpen(!isOpen );
@@ -20,11 +22,15 @@ function Navbar(props) {
       (async () => {
         let res = await get(`${API_ROOT}user_info`);
         if (res) {
+            if(res.name){
           setUser({
             name : res.name,
             image : res.profile_picture, 
               score: res.score
           })
+        } else {
+               history.push('login')
+            }
         }
       })();
     // getProfile((err, user) => {
