@@ -51,7 +51,7 @@ const Chat = ({ name, email }) => {
             data.val().email === msgs[msgs.length - 1].email
           ) {
             msgs = msgs.slice(0, msgs.length - 1);
-            console.log(msgs);
+            //console.log(msgs);
           }
         }
         if (size < 200) {
@@ -86,12 +86,12 @@ const Chat = ({ name, email }) => {
     db.ref()
       .child("blast-local")
       .once("value", (data) => {
-        console.log(cacheClearances);
+        //console.log(cacheClearances);
         if (
           cacheClearances === null ||
           data.val() > parseInt(cacheClearances)
         ) {
-          console.log(cacheClearances);
+          //console.log(cacheClearances);
           window.localStorage.removeItem("size");
           window.localStorage.removeItem("last");
           window.localStorage.removeItem("messages");
@@ -148,7 +148,7 @@ const Chat = ({ name, email }) => {
           className="messages"
           ref={messagesDivRef}
           onWheel={(e) => {
-            console.log(scrolledToBottom(messagesDivRef.current));
+            //console.log(scrolledToBottom(messagesDivRef.current));
             if (scrolledToBottom(messagesDivRef.current)) {
               setScrolled(false);
             } else {
@@ -156,7 +156,7 @@ const Chat = ({ name, email }) => {
             }
           }}
           onTouchMove={(e) => {
-            console.log(scrolledToBottom(messagesDivRef.current));
+            //console.log(scrolledToBottom(messagesDivRef.current));
             if (scrolledToBottom(messagesDivRef.current)) {
               setScrolled(false);
             } else {
@@ -165,7 +165,7 @@ const Chat = ({ name, email }) => {
           }}
         >
           {messages.map((message) => {
-            // console.log(message);
+            // //console.log(message);
             if (message["email"] === profile.email)
               return (
                 <div className="my-message">

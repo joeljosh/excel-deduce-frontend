@@ -15,7 +15,7 @@ function Answer(props) {
     (async () => {
       let level_number = localStorage.getItem("level_number");
       if (level_number === "undefined" || level_number === null) {
-        console.log("Level number corrupted");
+        //console.log("Level number corrupted");
       } else {
         let res = await post(`${API_ROOT}answer`, {
           answer: text,
@@ -24,7 +24,7 @@ function Answer(props) {
         if (!res.correct_answer) {
           cont.Alert("Wrong answer!");
         } else {
-          console.log(res);
+          //console.log(res);
           // localStorage.setItem(
           //   "level_number",
           //   parseInt(localStorage.getItem("level_number")) + 1

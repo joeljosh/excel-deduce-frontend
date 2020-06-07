@@ -16,102 +16,82 @@ function Doorboard(props) {
         level_number : 20,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 19,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 18,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 17,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 16,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 15,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 14,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 13,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 12,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 11,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 10,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 9,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 8,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 7,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 6,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 5,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 4,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 3,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 2,
         unlocked_by : null,
         current : false,
-        point : 300
     },{
         level_number : 1,
         unlocked_by : null,
         current : false,
-        point : 300
     }]
     const [doorInfo, setDoor] = useState(info); 
     const mainDiv = useRef();
@@ -131,7 +111,7 @@ function Doorboard(props) {
         });
         (async () => {
             let res = await get(`${API_ROOT}leaderboard`);
-            console.log(res);
+            //console.log(res);
             if (res !== undefined) {
                 res.forEach(r => {
                     setDoor(doorInfo => {

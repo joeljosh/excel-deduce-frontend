@@ -12,9 +12,9 @@ import Reload from "./components/reload/Reload";
 import { checkAuth } from "./auth0/http";
 import { login, handleAuthentication } from "./auth0/auth0";
 import Landing from "./components/Landing/Landing";
-import { API_ROOT } from "./auth0/api_config";
+//import { API_ROOT } from "./auth0/api_config";
 import FinalPage from "./components/FinalPage/FinalPage";
-import { get } from "./auth0/http";
+//import { get } from "./auth0/http";
 import MainURL from "./components/main/MainURL";
 
 function App() {

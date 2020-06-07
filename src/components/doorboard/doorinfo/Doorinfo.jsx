@@ -1,12 +1,12 @@
 import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faDoorOpen, faDoorClosed} from '@fortawesome/free-solid-svg-icons';
-import {useHistory,useParams} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
 function Doorinfo(props) {
 
     const history = useHistory();
-    let {levelParam} = useParams();
+    //let {levelParam} = useParams();
 
     const goto = () => {
       if(props.isOpen){
@@ -20,7 +20,8 @@ function Doorinfo(props) {
             <FontAwesomeIcon icon={props.isOpen ? faDoorOpen : faDoorClosed} className="door mr-2" />
             <div className="info">
                 <p className={`door-name tex ${props.bor ? "tex-tra" : ""}`}>Door {props.door}</p>
-                <p className={`points grey-2 tex font-weight-bold ${props.bor ? "tex-tra" : ""}`}>{props.point} PTS</p>
+                {//<p className={`points grey-2 tex font-weight-bold ${props.bor ? "tex-tra" : ""}`}>{props.point} PTS</p>
+                }
             </div>
             <div className="img-cont">
                 {props.isOpen && <img src={props.img ? props.img : require('../../../assets/images/profile.png')} className="winner-img d-block mx-auto" alt="" />}

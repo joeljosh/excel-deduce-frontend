@@ -75,7 +75,7 @@ function MainURL(props) {
 
   useEffect(() => {
     get(`${API_ROOT}user_info`).then((res) => {
-      console.log(res.email);
+      //console.log(res.email);
       if (res) {
         let p = {
           name: res.name,
@@ -95,7 +95,7 @@ function MainURL(props) {
           localStorage.setItem("level_number", resp.level_number);
         }
         let res = await get(`${API_ROOT}getlevel?level=${levelParam}`);
-        console.log(res);
+        //console.log(res);
         if (res) {
           setLevel(res);
           cont.setLevel(res.level_number);
@@ -112,13 +112,13 @@ function MainURL(props) {
 
     const curr_lev_ref = db.ref().child("current_level");
     curr_lev_ref.on("value", (data) => {
-      console.log("data val", data.val());
+      //console.log("data val", data.val());
       let k = data.val().level;
-      console.log(data.val().user, profile.email, data.val().user !== profile.email);
+      //console.log(data.val().user, profile.email, data.val().user !== profile.email);
       if (data.val().user) {
         let currLevel = parseInt(localStorage.getItem("level_number"));
-        console.log("cuuent levle", currLevel);
-        console.log("say 2");
+        //console.log("cuuent levle", currLevel);
+        //console.log("say 2");
         if (currLevel !== undefined && currLevel !== null) {
           if (k !== currLevel) {
             localStorage.setItem("level_number", data.val().level);
@@ -199,7 +199,7 @@ function MainURL(props) {
       <div className="contain">
         <div id="wall">
           <div className="mascot-hint">
-            {level.hint && level.hints.length > 0 && (
+            {level.hints.length > 0 && (
               <div>
                 {isBubble ? (
                   <div
