@@ -13,7 +13,7 @@ const ScoreBoard  = (props) => {
             setScores(res);
             props.setStart(true)
         });
-    },[]);
+    });
 
     return(
         props.start &&

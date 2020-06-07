@@ -1,6 +1,6 @@
 import React from "react";
 import './Landing.scss'
-import Box from '../../assets/images/BOX.png'
+//import Box from '../../assets/images/BOX.png'
 // import Man from '../../assets/images/man-front.png'
 
 

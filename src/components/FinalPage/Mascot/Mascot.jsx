@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Avatar from '../../../assets/images/mascot.png'
+//import Avatar from '../../../assets/images/mascot.png'
 import './Mascot.scss'
 import GIF from '../../../assets/images/confetti.gif'
 import ScoreBoard from "../ScoreBoard/ScoreBoard";

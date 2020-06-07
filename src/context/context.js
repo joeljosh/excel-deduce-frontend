@@ -9,6 +9,10 @@ function ContextProvider (props) {
     const [time, setTime] = useState();
     const [isSolve,setIsSolve] = useState(false);
     const [level,setLevel] = useState(localStorage.getItem('level_number'));
+    const [levdet, setLevdet] = useState({
+        level : 0,
+        points: 0,
+    })
 
     const Alert = (x, y) => {
         if(x === "Correct answer!"){
@@ -27,7 +31,7 @@ function ContextProvider (props) {
     };
 
     return(
-        <Context.Provider value={{isAlert,level,setLevel,isSolve,setIsSolve, setAlert, alertText, setText, Alert, time, setTime}}>
+        <Context.Provider value={{isAlert,level,setLevel,isSolve,setIsSolve, setAlert, alertText, setText, Alert, time, setTime, levdet, setLevdet}}>
             {props.children}
         </Context.Provider>
     )

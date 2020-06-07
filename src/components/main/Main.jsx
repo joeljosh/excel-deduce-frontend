@@ -72,7 +72,7 @@ function Main(props) {
 
   useEffect(() => {
     get(`${API_ROOT}user_info`).then((res) => {
-      console.log(res.email);
+      //console.log(res.email);
       if (res) {
         let p = {
           name: res.name,
@@ -88,9 +88,13 @@ function Main(props) {
     //Effect callbacks are synchronous to prevent race conditions
     (async () => {
       let res = await get(`${API_ROOT}question`);
-      console.log(res);
+      //console.log(res);
       if (res) {
         setLevel(res);
+        cont.setLevdet({
+          level : res.level_number,
+          points : res.score,
+        })
         if(res.level_number > 20){
           history.push('/final')
         }
@@ -99,7 +103,7 @@ function Main(props) {
       }
     })();
 
-    console.log("say 1");
+    //console.log("say 1");
 
     window.addEventListener("resize", () => {
       if (document.fullscreen) {
@@ -111,13 +115,13 @@ function Main(props) {
 
     const curr_lev_ref = db.ref().child("current_level");
     curr_lev_ref.on("value", (data) => {
-      console.log("data val", data.val());
+      //console.log("data val", data.val());
       let k = data.val().level;
-      console.log(data.val().user, profile.email, data.val().user !== profile.email);
+      //console.log(data.val().user, profile.email, data.val().user !== profile.email);
       if (data.val().user) {
         let currLevel = parseInt(localStorage.getItem("level_number"));
-        console.log("cuuent levle", currLevel);
-        console.log("say 2");
+        //console.log("cuuent levle", currLevel);
+        //console.log("say 2");
         if (currLevel !== undefined && currLevel !== null) {
           if (k !== currLevel && data.val().user !== profile.email) {
             localStorage.setItem("level_number", data.val().level);

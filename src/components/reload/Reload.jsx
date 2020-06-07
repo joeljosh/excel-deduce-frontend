@@ -3,8 +3,8 @@ import './Reload.scss';
 import {ReactComponent as PhoneLogo} from '../../assets/images/phone.svg'
 import {ReactComponent as Click} from '../../assets/images/click.svg'
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faRedoAlt} from '@fortawesome/free-solid-svg-icons';
+//import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+//import {faRedoAlt} from '@fortawesome/free-solid-svg-icons';
 
 
 function Reload(props) {
