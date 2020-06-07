@@ -127,10 +127,6 @@ function MainURL(props) {
         }
       }
     });
-    return () => curr_lev_ref.off("value");
-  }, [profile]);
-
-  useEffect(() => {
     const hintref = db.ref().child("new_hint");
     hintref.on("value", (data) => {
       if (data.val()) {
@@ -142,7 +138,10 @@ function MainURL(props) {
         }
       }
     });
-    return () => hintref.off("value");
+    return () => {
+      curr_lev_ref.off("value");
+      hintref.off("value");
+    };
   }, [profile]);
 
   if (parseInt(localStorage.getItem("level_number")) <= levelParam) {

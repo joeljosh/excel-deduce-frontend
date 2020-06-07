@@ -113,7 +113,7 @@ function Main(props) {
 
     const curr_lev_ref = db.ref().child("current_level");
     curr_lev_ref.on("value", (data) => {
-      //console.log("data val", data.val());
+      // console.log("data val", data.val());
       let k = data.val().level;
       //console.log(data.val().user, profile.email, data.val().user !== profile.email);
       if (data.val().user) {
@@ -131,10 +131,6 @@ function Main(props) {
         }
       }
     });
-    return () => curr_lev_ref.off("value");
-  }, [profile]);
-
-  useEffect(() => {
     const hintref = db.ref().child("new_hint");
     hintref.on("value", (data) => {
       if (data.val()) {
@@ -146,7 +142,10 @@ function Main(props) {
         }
       }
     });
-    return () => hintref.off("value");
+    return () => {
+      curr_lev_ref.off("value");
+      hintref.off("value");
+    };
   }, [profile]);
 
   return (
