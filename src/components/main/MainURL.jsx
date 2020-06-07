@@ -199,7 +199,7 @@ function MainURL(props) {
       <div className="contain">
         <div id="wall">
           <div className="mascot-hint">
-            {level.hint && level.hints.length > 0 && (
+            {level.hints.length > 0 && (
               <div>
                 {isBubble ? (
                   <div
