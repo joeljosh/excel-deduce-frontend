@@ -39,9 +39,13 @@ export const post = (url, data) => {
                 "Authorization": `Bearer ${at}`
             }
         }).then(res => res.json())
-            .catch(err => err)
+            .catch(err => {
+                if(err.status === 401){
+                    window.location.replace(`/login`)
+                }
+            })
     }
-}
+};
 
 export const get = url => {
     let at = checkAuth();
