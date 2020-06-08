@@ -160,18 +160,34 @@ body{
         #wall{
             grid-column: 1/2;
             height: 90vh;
+            // .graf{
+            //     border : solid 1vh #523629;
+            //     background-color: white;
+            //     position: absolute;
+            //     top:25%;
+            //     left: 15%;
+            //     width: 18%;
+            //     z-index: 40;
+            //     transition: all 0.5s;
+            //     font-size: 2.8vh;
+            //     .p{
+            //         margin-top: 1vh;
+            //         width: 100%;
+            //     }
+            // }
             .graf{
                 border : solid 1vh #523629;
                 background-color: white;
                 position: absolute;
+                display: flex;
                 top:25%;
                 left: 15%;
                 width: 18%;
+                height: 23%;
                 z-index: 40;
                 transition: all 0.5s;
-                font-size: 2.8vh;
+                align-items: center;
                 .p{
-                    margin-top: 1vh;
                     width: 100%;
                 }
             }

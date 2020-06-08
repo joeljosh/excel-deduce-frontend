@@ -50,6 +50,18 @@ function Main(props) {
     }
   };
 
+  const fsize = (num) => {
+    if(num >= 100){
+      return 2;
+    }else if(num >= 50){
+      return 3;
+    }else if(num >= 15){
+      return 4;
+    }else{
+      return 5;
+    }
+  }
+
   const photo = (x, link) => {
     if (!isAnswer && !isNotice) {
       setPhoto({ image: link, state: x });
@@ -236,6 +248,7 @@ function Main(props) {
             <div
               className={`graf cursor-pointer text-center`}
               onClick={() => notice()}
+              style={{fontSize : `${fsize(level.question.length)}vh`}}
             >
               <div className="p">
                 <p>{level.question}</p>

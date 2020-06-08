@@ -7,8 +7,10 @@
     background-color: #ffffff;
     top:25%;
     width: 36%;
+    height: 46%;
+    display: flex;
+    align-items: center;
     border : solid 2vh #523629;
-    font-size: 5.6vh;
     .close{
         color: black;
         font-size: 7vh;
@@ -17,7 +19,6 @@
         right: -15%;
     }
     .p{
-        margin-top: 1vh;
         width: 100%;
     }
 }
