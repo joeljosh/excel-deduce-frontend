@@ -162,6 +162,9 @@ function Main(props) {
 
   return (
     <div id="main">
+      <div onClick={()=>cont.setIsRule(true)} className={'rules-main position-absolute'}>
+        Rules
+      </div>
       <div
         className="refresh-screen cursor-pointer"
         onClick={() => {
