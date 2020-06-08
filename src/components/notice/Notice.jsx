@@ -4,8 +4,20 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import './Notice.scss';
 
 function Notice (props) {
+    const fsize = (num) => {
+        if(num >= 100){
+          return 4;
+        }else if(num >= 50){
+          return 6;
+        }else if(num >= 15){
+          return 8;
+        }else{
+          return 10;
+        }
+    }
+
     return(
-        <div className={`notice text-center cursor-default`} >
+        <div className={`notice text-center cursor-default`} style={{fontSize: `${fsize(props.question.length)}vh`}} >
             <FontAwesomeIcon
                 onClick={() => props.toggle()}
                 className="close cursor-pointer"
