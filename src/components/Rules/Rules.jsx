@@ -11,25 +11,25 @@ const Rules = () => {
             <div className={"div  pem-5"}>
 
                 <div className={'text-center mb-3 rules-heading col'}>
-                    <u>Rules And Regulations</u>
+                    <u>Rules</u>
                 </div>
                 <ul>
                     <li className={'mb-2'}>
                         <b>Answer Format</b>
                         <p>
-                            The answer should be in submitted in lower case and without space. <br/> Example, if the right answer is Harry Potter it should be submitted as harrypotter.
+                            The answer should be in lowercase and without space or special characters. <br/>For example if the answer is Hello World! it should be written as helloworld.
                         </p>
                     </li>
                     <li className={'mb-2'}>
-                        <b>Rules 1</b>
+                        <b>Hints</b>
                         <p>
-                            This is the rule
+                           Hints would be provided at predefined times (So don't beg for clues).
                         </p>
                     </li>
                     <li className={'mb-2'}>
-                        <b>Rules 1</b>
+                        <b>Final Level</b>
                         <p>
-                            This is the rule
+                            The final round is CTF, find the flag and type it in the "correct" place (Remember every word matters).
                         </p>
                     </li>
                 </ul>
