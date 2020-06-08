@@ -1,0 +1,39 @@
+.rules-box{
+  z-index: 1000;
+  left: 50%;
+  top:50%;
+  transform: translateY(-50%) translateX(-50%);
+  position: absolute;
+  height: 80vh;
+  width:70vw;
+  color: white;
+  background-color: rgba(0,0,0,0.9);
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 900px) {
+  .rules-box,.btn-close-hint{
+    font-size: 0.8em!important;
+  }
+}
+
+.rules-heading{
+  font-size: 1.2em;
+  font-weight: 500;
+
+}
+
+@media only screen and (min-width: 900px) {
+  .rules-box{
+    font-size: 1.5em;
+  }
+}
+
+.pem-5{
+  padding: 3em;
+}
+.btn-close-hint{
+  position: absolute;
+  right: 2em;
+  bottom: 2em;
+}
