@@ -63,7 +63,7 @@ function Navbar(props) {
             <div className="navbar-brand click-back pb-2" style={{marginLeft:'12vw'}}>
                 <div className={'d-flex ml-3 align-items-center'}>
                     <div className={'ml-1'}>Door : {cont.levdet.level} </div>
-                    <div className={'ml-4'}>PTS : {cont.levdet.points}</div>
+                    <div className={'ml-4'}>Points : {cont.levdet.points}</div>
                 </div>
             </div>
             }
