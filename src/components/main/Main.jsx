@@ -51,7 +51,9 @@ function Main(props) {
   };
 
   const fsize = (num) => {
-    if(num >= 100){
+    if(num >= 150){
+      return 1.5;
+    }else if(num >= 100){
       return 2;
     }else if(num >= 50){
       return 3;

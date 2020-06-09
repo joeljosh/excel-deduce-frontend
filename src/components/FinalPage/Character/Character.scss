@@ -1,0 +1,49 @@
+.char-box{
+    height: 100vh;
+    width: 25%;
+    position: absolute;
+    display: block;
+    left: 10%;
+    .portal{
+        position: absolute;
+        margin-top: -31%;
+        width: 70%;
+        opacity: 0;
+        animation-name: rot;
+        animation-iteration-count: 8;
+        animation-duration: 0.5s;
+        animation-timing-function: linear;
+        z-index: 10;
+    }
+    .man{
+        width: 60%;
+        position: absolute;
+        left: 8%;
+        top : 53%;
+        animation-name: fall;
+        animation-iteration-count: 1;
+        animation-duration: 0.6s;
+        animation-delay: 1.5s;
+        animation-fill-mode: backwards;
+    }
+}
+
+@keyframes rot{
+    0%{
+        transform: rotateX(80deg) rotateZ(0deg);
+        opacity: 1;
+    }
+    100%{
+        transform: rotateX(80deg) rotateZ(360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes fall{
+    0%{
+        top : -50%;
+    }
+    100%{
+        top : 53%;
+    }
+}
