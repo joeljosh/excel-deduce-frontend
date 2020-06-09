@@ -33,10 +33,13 @@ const ScoreBoard  = (props) => {
                     <div className={"score-flex"}>
 
                         {scores?.map( (x,index) =>
-
+                        {return  x.score?
                         <div className={"mb-2 score-flex-box flex-grow-1"}>
                             <Score index={index + 1} name={x.name} score={x.score} img={x.profile_picture}/>
                         </div>
+                            :
+                            null
+                            }
                         )
                         }
                     </div>
