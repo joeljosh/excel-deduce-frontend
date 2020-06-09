@@ -81,17 +81,15 @@ function Main(props) {
 
   const [profile, setProfile] = useState({});
 
-
   useEffect(() => {
     get(`${API_ROOT}user_info`).then((res) => {
       //console.log(res.email);
       if (res) {
         let p = {
           name: res.name,
-          email: res.email
+          email: res.email,
         };
-        setProfile({...p}
-        );
+        setProfile({ ...p });
       }
     });
   }, []);
@@ -104,11 +102,11 @@ function Main(props) {
       if (res) {
         setLevel(res);
         cont.setLevdet({
-          level : res.level_number,
-          points : res.score,
-        })
-        if(res.level_number > 20){
-          history.push('/final')
+          level: res.level_number,
+          points: res.score,
+        });
+        if (res.level_number > 20) {
+          history.push("/final");
         }
         localStorage.setItem("level_number", res.level_number);
         cont.setLevel(res.level_number);
@@ -127,7 +125,7 @@ function Main(props) {
 
     const curr_lev_ref = db.ref().child("current_level");
     curr_lev_ref.on("value", (data) => {
-      //console.log("data val", data.val());
+      // console.log("data val", data.val());
       let k = data.val().level;
       //console.log(data.val().user, profile.email, data.val().user !== profile.email);
       if (data.val().user) {
@@ -138,18 +136,35 @@ function Main(props) {
           if (k !== currLevel && data.val().user !== profile.email) {
             localStorage.setItem("level_number", data.val().level);
             cont.Alert("Someone already solved this level!");
-            window.location.reload()
+            window.location.reload();
             // cont.Alert("Someone already solved this level!", 3000); //for reloading after 3s.
             // Give some better visual feedback to user and reload page after a small delay to get new level
           }
         }
       }
     });
-    return () => curr_lev_ref.off("value");
+    const hintref = db.ref().child("new_hint");
+    hintref.on("value", (data) => {
+      if (data.val()) {
+        let currLevel = parseInt(localStorage.getItem("level_number"));
+        if (currLevel !== undefined && currLevel !== null) {
+          if (data.val().level !== currLevel) {
+            setLevel({ ...level, hints: [...level.hints, data.val().hint] });
+          }
+        }
+      }
+    });
+    return () => {
+      curr_lev_ref.off("value");
+      hintref.off("value");
+    };
   }, [profile]);
 
   return (
     <div id="main">
+      <div onClick={()=>cont.setIsRule(true)} className={'rules-main position-absolute'}>
+        Rules
+      </div>
       <div
         className="refresh-screen cursor-pointer"
         onClick={() => {
@@ -211,27 +226,29 @@ function Main(props) {
       <div className="contain">
         <div id="wall">
           <div className="mascot-hint">
-            { //level.hint && level.hints.length > 0 && (
+            {
+              //level.hint && level.hints.length > 0 && (
               level.hints.length > 0 && (
-              <div>
-                {isBubble ? (
-                  <div
-                    onClick={() => setBubble(false)}
-                    className="bubble cursor-pointer"
-                  >
-                    {level.hints.map((x, i) => (
-                      <p key={i}>{x.hint}</p>
-                    ))}
-                  </div>
-                ) : (
-                  <FontAwesomeIcon
-                    onClick={() => setBubble(true)}
-                    className="bulb cursor-pointer"
-                    icon={faLightbulb}
-                  />
-                )}
-              </div>
-            )}
+                <div>
+                  {isBubble ? (
+                    <div
+                      onClick={() => setBubble(false)}
+                      className="bubble cursor-pointer"
+                    >
+                      {level.hints.map((x, i) => (
+                        <p key={i}>{x.hint}</p>
+                      ))}
+                    </div>
+                  ) : (
+                    <FontAwesomeIcon
+                      onClick={() => setBubble(true)}
+                      className="bulb cursor-pointer"
+                      icon={faLightbulb}
+                    />
+                  )}
+                </div>
+              )
+            }
             <img
               src={require("../../assets/images/man.png")}
               alt=""
@@ -256,27 +273,25 @@ function Main(props) {
             </div>
           )}
         </div>
-        {cont.level !== 20 &&
+        {cont.level !== 20 && (
           <div id="door">
             <div className={cont.isSolve ? "d-img-op" : "d-img"}>
               {cont.isSolve && (
-                  <div className={"position-absolute arrow-img"}>
-                    <img
-                        onClick={() => window.location.reload()}
-                        src={Arrow}
-                        alt=""
-                    />
-                  </div>
+                <div className={"position-absolute arrow-img"}>
+                  <img
+                    onClick={() => window.location.reload()}
+                    src={Arrow}
+                    alt=""
+                  />
+                </div>
               )}
               <div
-                  className="d-lock cursor-pointer"
-                  onClick={() => answer()}
-              >
-
-              </div>
+                className="d-lock cursor-pointer"
+                onClick={() => answer()}
+              ></div>
             </div>
           </div>
-        }
+        )}
         <div id="photo" className="d-flex">
           {level.level_file_2 && (
             <Imagebox photo={photo} image={level.level_file_2} />

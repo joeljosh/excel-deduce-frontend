@@ -16,6 +16,7 @@ import Landing from "./components/Landing/Landing";
 import FinalPage from "./components/FinalPage/FinalPage";
 //import { get } from "./auth0/http";
 import MainURL from "./components/main/MainURL";
+import Rules from "./components/Rules/Rules";
 
 function App() {
   const [screen, setScreen] = useState(true);
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <ContextProvider>
+        <Rules/>
       <Reload screen={screen} setScreen={setScreen} />
       <Router history={history}>
         <Alertbox />
@@ -67,7 +69,7 @@ function App() {
             path="/login/callback"
             render={() => handleAuthentication()}
           />
-          <Route exact path="/" render={Landing} />
+          <Route exact path="/" component={Landing} />
             <Route exact path="/final" render={FinalPage} />
         </Switch>
       </Router>
