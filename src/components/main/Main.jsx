@@ -282,25 +282,23 @@ function Main(props) {
             </div>
           )}
         </div>
-        {cont.level !== 20 && (
-          <div id="door">
-            <div className={cont.isSolve ? "d-img-op" : "d-img"}>
-              {cont.isSolve && (
-                <div className={"position-absolute arrow-img"}>
-                  <img
-                    onClick={() => window.location.reload()}
-                    src={Arrow}
-                    alt=""
-                  />
-                </div>
-              )}
-              <div
-                className="d-lock cursor-pointer"
-                onClick={() => answer()}
-              ></div>
-            </div>
+        <div id="door">
+          <div className={cont.isSolve ? "d-img-op" : "d-img"}>
+            {cont.isSolve && (
+              <div className={"position-absolute arrow-img"}>
+                <img
+                  onClick={() => window.location.reload()}
+                  src={Arrow}
+                  alt=""
+                />
+              </div>
+            )}
+            <div
+              className="d-lock cursor-pointer"
+              onClick={() => answer()}
+            ></div>
           </div>
-        )}
+        </div>
         <div id="photo" className="d-flex">
           {level.level_file_2 && (
             <Imagebox photo={photo} image={level.level_file_2} />
