@@ -36,14 +36,14 @@ Cheshires as his birthright. </p>
                     <p>Do you have the wit and the nerve to walk in Roy's feet, to stretch your hand out and grasp
 the legacy as your own? </p>
                     <p>Onward we go. </p>
-                    <FontAwesomeIcon className="play" icon={faPlayCircle} onClick={()=>props.history.push('/game')} />
+                    <FontAwesomeIcon className="play cursor-pointer" icon={faPlayCircle} onClick={()=>props.history.push('/game')} />
                 </div>
-                <div className={"green-button"} onClick={()=>setGame(true)}>
+                <div className={"green-button cursor-pointer"} onClick={()=>setGame(true)}>
                     <div>
                         START
                     </div>
                 </div>
-                <div className={"rule-btn green-button"} onClick={()=>cont.setIsRule(true)}>
+                <div className={"rule-btn green-button cursor-pointer"} onClick={()=>cont.setIsRule(true)}>
                     <div>
                         RULES
                     </div>

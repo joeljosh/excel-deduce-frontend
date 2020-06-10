@@ -16,7 +16,7 @@ function Doorinfo(props) {
     };
 
     return(
-        <div ref={props.refer} onClick={goto}  className={`d-flex door-info ${props.isOpen && 'hover'} pr-1 justify-content grey-3 ${props.current ? "current-door" : ""}`}>
+        <div ref={props.refer} onClick={goto}  className={`d-flex door-info cursor-pointer ${props.isOpen && 'hover'} pr-1 justify-content grey-3 ${props.current ? "current-door" : ""}`}>
             <FontAwesomeIcon icon={props.isOpen ? faDoorOpen : faDoorClosed} className="door mr-2" />
             <div className="info">
                 <p className={`door-name tex ${props.bor ? "tex-tra" : ""}`}>Door {props.door}</p>

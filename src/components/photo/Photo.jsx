@@ -7,7 +7,7 @@ function Photo(props) {
     return(
         <div id="photo-model">
             <FontAwesomeIcon onClick={() => props.toggle()} className="close cursor-pointer" icon = {faTimesCircle} />
-            <div className="clue">
+            <div className="clue d-flex justify-content-center">
                 <img className="clue-img img-fluid mx-auto d-block" src={props.link} alt="" />
             </div>
         </div>
