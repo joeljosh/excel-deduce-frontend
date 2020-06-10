@@ -26,12 +26,12 @@ const Rules = () => {
                            Hints would be provided at predefined times (So don't beg for clues).
                         </p>
                     </li>
-                    <li className={'mb-2'}>
-                        <b>Final Level</b>
-                        <p>
-                            The final round is CTF, find the flag and type it in the "correct" place (Remember every word matters).
-                        </p>
-                    </li>
+                    {/*<li className={'mb-2'}>*/}
+                    {/*    <b>Final Level</b>*/}
+                    {/*    <p>*/}
+                    {/*        The final round is CTF, find the flag and type it in the "correct" place (Remember every word matters).*/}
+                    {/*    </p>*/}
+                    {/*</li>*/}
                 </ul>
             </div>
             <button onClick={()=>cont.setIsRule(false)} className={'btn btn-close-hint btn-light'}>
