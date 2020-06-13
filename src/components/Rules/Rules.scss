@@ -25,7 +25,13 @@
 
 @media only screen and (min-width: 900px) {
   .rules-box{
-    font-size: 1.5em;
+    font-size: 1.4em;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .rules-box{
+    font-size: 0.73em!important;
   }
 }
 

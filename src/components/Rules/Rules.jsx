@@ -26,6 +26,12 @@ const Rules = () => {
                            Hints would be provided at predefined times (So don't beg for clues).
                         </p>
                     </li>
+                    <li className={'mb-2'}>
+                        <b>Answer Submission</b>
+                        <p>
+                            The first person who solves a given level gets all the points assigned to it. This will automatically unlock the level for everyone. So sharing clues will hinder your chance at getting points as no one other than the first person to solve it will receive any points.
+                        </p>
+                    </li>
                     {/*<li className={'mb-2'}>*/}
                     {/*    <b>Final Level</b>*/}
                     {/*    <p>*/}
