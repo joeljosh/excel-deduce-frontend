@@ -5,7 +5,9 @@ import './Notice.scss';
 
 function Notice (props) {
     const fsize = (num) => {
-        if(num >= 150){
+        if(props.level === 12){
+          return 6;
+        }else if(num >= 150){
           return 3;
         }else if(num >= 100){
           return 4;
