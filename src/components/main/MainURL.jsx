@@ -70,6 +70,27 @@ function MainURL(props) {
     setChat(!isChat);
   };
 
+  const is_url = (str) =>{
+    const regexp =  /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+    return regexp.test(str);
+  }
+
+  const fsize = (num) => {
+    if(level.level_number === 12){
+      return 3;
+    }else if(num >= 150){
+      return 1.5;
+    }else if(num >= 100){
+      return 2;
+    }else if(num >= 50){
+      return 3;
+    }else if(num >= 15){
+      return 4;
+    }else{
+      return 5;
+    }
+  }
+
   const [profile, setProfile] = useState({});
 
   useEffect(() => {
@@ -210,7 +231,7 @@ function MainURL(props) {
       <Doorboard toggle={board} bor={isBoard} />
       {isPhoto.state && <Photo toggle={photo} link={isPhoto.image} />}
       {isAnswer && <Answer toggle={answer} />}
-      {isNotice && <Notice toggle={notice} question={level.question} />}
+      {isNotice && <Notice toggle={notice} question={level.question} level={level.level_number} />}
       <div className="contain">
         <div id="wall">
           <div className="mascot-hint">
@@ -222,7 +243,9 @@ function MainURL(props) {
                     className="bubble cursor-pointer"
                   >
                     {level.hints.map((x, i) => (
-                      <p key={i}>{x.hint}</p>
+                        is_url(x.hint) ? 
+                        <p key={i}><a href={x.hint}>hint : {i}</a></p> : 
+                        <p key={i}>{x.hint}</p>
                     ))}
                   </div>
                 ) : (
@@ -248,8 +271,9 @@ function MainURL(props) {
           )}
           {level.question && (
             <div
-              className={`graf cursor-pointer text-center`}
+              className={`graf cursor-pointer text-center`}  
               onClick={() => notice()}
+              style={{fontSize : `${fsize(level.question.length)}vh`}}
             >
               <div className="p">
                 <p>{level.question}</p>
