@@ -246,8 +246,8 @@ function Main(props) {
                     >
                       {level.hints.map((x, i) => (
                         is_url(x.hint) ? 
-                        <p key={i}><a href={x.hint}>hint : {i}</a></p> : 
-                        <p key={i}>{x.hint}</p>
+                        <p key={i}><li><a href={x.hint}>hint : {i+1}</a></li></p> : 
+                        <p key={i}><li>{x.hint}</li></p>
                       ))}
                     </div>
                   ) : (
