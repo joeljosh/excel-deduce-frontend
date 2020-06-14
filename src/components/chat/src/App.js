@@ -7,7 +7,7 @@ import { API_ROOT } from "../../../auth0/api_config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
-const Chat = ({ name, email }) => {
+const Chat = ({ setUnread, unread }) => {
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState([]);
   const [scrolled, setScrolled] = useState(false);
@@ -79,6 +79,7 @@ const Chat = ({ name, email }) => {
             return [...newMessages, data.val()];
           });
         }
+        setUnread(unread + 1);
       }
     };
     const size = window.localStorage.getItem("size");
