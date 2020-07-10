@@ -157,8 +157,8 @@ function Main(props) {
       if (data.val()) {
         let currLevel = parseInt(localStorage.getItem("level_number"));
         if (currLevel !== undefined && currLevel !== null) {
-          if (data.val().level !== currLevel) {
-            setLevel({ ...level, hints: [...level.hints, data.val().hint] });
+          if (data.val().level === currLevel) {
+            setLevel({ ...level, hints: [...level.hints,{hint:data.val().hint}] });
           }
         }
       }
