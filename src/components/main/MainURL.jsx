@@ -150,10 +150,11 @@ function MainURL(props) {
     });
     const hintref = db.ref().child("new_hint");
     hintref.on("value", (data) => {
+      console.log(data);
       if (data.val()) {
         let currLevel = parseInt(localStorage.getItem("level_number"));
         if (currLevel !== undefined && currLevel !== null) {
-          if (data.val().level !== currLevel) {
+          if (data.val().level === currLevel) {
             setLevel({ ...level, hints: [...level.hints, data.val().hint] });
           }
         }
