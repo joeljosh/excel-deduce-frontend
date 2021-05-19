@@ -3,7 +3,7 @@ import Score from "./Score/Score";
 import './ScoreBoard.scss'
 import {get} from "../../../auth0/http";
 import {API_ROOT} from "../../../auth0/api_config";
-import {faDivide} from "@fortawesome/free-solid-svg-icons";
+//import {faDivide} from "@fortawesome/free-solid-svg-icons";
 
 const ScoreBoard  = (props) => {
 
@@ -14,6 +14,7 @@ const ScoreBoard  = (props) => {
             setScores(res);
             props.setStart(true)
         });
+        // eslint-disable-next-line
     }, []);
 
     return(

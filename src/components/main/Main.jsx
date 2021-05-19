@@ -167,7 +167,7 @@ function Main(props) {
       curr_lev_ref.off("value");
       hintref.off("value");
     };
-  }, [profile]);
+  }, );
 
   return (
     <div id="main">

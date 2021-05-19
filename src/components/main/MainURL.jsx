@@ -164,7 +164,7 @@ function MainURL(props) {
       curr_lev_ref.off("value");
       hintref.off("value");
     };
-  }, [profile]);
+  }, );
 
   if (parseInt(localStorage.getItem("level_number")) <= levelParam) {
     return <Redirect from={`/game/${levelParam}`} to={"/game"} />;

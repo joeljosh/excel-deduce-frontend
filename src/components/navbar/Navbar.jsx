@@ -46,7 +46,7 @@ function Navbar(props) {
     //      })
     //    }
     //  })
-    }, []);
+    }, );
     return(
         <nav className="navbar cursor-default nbar navbar-light d-flex">
             <div>
@@ -79,7 +79,7 @@ function Navbar(props) {
                             <span className="caret"> </span>
                         </button>
                         <div className={"dropdown-menu box-logout dropdown-menu-right "+menuClass} aria-labelledby="dropdownMenuButton">
-                            <a onClick={logout} className="dropdown-item" href="#">Logout</a>
+                            <a onClick={logout} className="dropdown-item" href="#sss">Logout</a>
                         </div>
                     </div>
                     </div>
