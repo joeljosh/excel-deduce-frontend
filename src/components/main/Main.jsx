@@ -42,6 +42,8 @@ function Main(props) {
   const [isAnswer, setAnswer] = useState(false);
   const [isChat, setChat] = useState(false);
   const [isFull, setFull] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(false)
+  const [loadingQuestion, setLoadingQuestion] = useState(false)
   //const [anime, setAnime] = useState(false);
 
   const notice = () => {
@@ -91,9 +93,11 @@ function Main(props) {
   const [profile, setProfile] = useState({});
 
   useEffect(() => {
+    setLoadingUser(true)
     get(`${API_ROOT}user_info`).then((res) => {
       //console.log(res.email);
       if (res) {
+        setLoadingUser(false)
         let p = {
           name: res.name,
           email: res.email,
@@ -102,13 +106,18 @@ function Main(props) {
       }
     });
   }, []);
-
+  useEffect(()=>{
+    console.log("Question Loader:", loadingQuestion);
+    console.log("User loader:", loadingUser);
+  },[loadingUser,loadingQuestion])
   useEffect(() => {
     //Effect callbacks are synchronous to prevent race conditions
     (async () => {
+      setLoadingQuestion(true);
       let res = await get(`${API_ROOT}question`);
       //console.log(res);
       if (res) {
+        setLoadingQuestion(false);
         setLevel(res);
         cont.setLevdet({
           level: res.level_number,
@@ -171,6 +180,9 @@ function Main(props) {
 
   return (
     <div id="main">
+      {
+        loadingUser && loadingQuestion && (<div><h1>Loading....</h1></div>)
+      }
       <div onClick={()=>cont.setIsRule(true)} className={'rules-main position-absolute'}>
         Rules
       </div>
