@@ -32,6 +32,7 @@ function Main(props) {
     question: null,
     hints: [],
   });
+  const [loading, setLoading] = useState(false);
   const [isBoard, setBoard] = useState(false);
   const [isBubble, setBubble] = useState(false);
   const [isPhoto, setPhoto] = useState({
@@ -106,10 +107,14 @@ function Main(props) {
   useEffect(() => {
     //Effect callbacks are synchronous to prevent race conditions
     (async () => {
+      setLoading(true);
       let res = await get(`${API_ROOT}question`);
+      
       //console.log(res);
       if (res) {
         setLevel(res);
+        setLoading(false);
+        console.log(loading);
         cont.setLevdet({
           level: res.level_number,
           points: res.score,
@@ -168,9 +173,14 @@ function Main(props) {
       hintref.off("value");
     };
   }, );
-
+  
   return (
+    
+    
     <div id="main">
+  {loading &&   <div ><h1>loading....</h1>
+        </div> }
+    
       <div onClick={()=>cont.setIsRule(true)} className={'rules-main position-absolute'}>
         Rules
       </div>
@@ -310,6 +320,9 @@ function Main(props) {
           )}
         </div>
       </div>
+      
+    
+   
     </div>
   );
 }
