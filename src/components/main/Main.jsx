@@ -32,7 +32,7 @@ function Main(props) {
     question: null,
     hints: [],
   });
-  const [loading, setLoading] = useState(false);
+  
   const [isBoard, setBoard] = useState(false);
   const [isBubble, setBubble] = useState(false);
   const [isPhoto, setPhoto] = useState({
@@ -43,6 +43,8 @@ function Main(props) {
   const [isAnswer, setAnswer] = useState(false);
   const [isChat, setChat] = useState(false);
   const [isFull, setFull] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(false)
+  const [loadingQuestion, setLoadingQuestion] = useState(false)
   //const [anime, setAnime] = useState(false);
 
   const notice = () => {
@@ -92,9 +94,11 @@ function Main(props) {
   const [profile, setProfile] = useState({});
 
   useEffect(() => {
+    setLoadingUser(true)
     get(`${API_ROOT}user_info`).then((res) => {
       //console.log(res.email);
       if (res) {
+        setLoadingUser(false)
         let p = {
           name: res.name,
           email: res.email,
@@ -103,18 +107,21 @@ function Main(props) {
       }
     });
   }, []);
-
+  useEffect(()=>{
+    console.log("Question Loader:", loadingQuestion);
+    console.log("User loader:", loadingUser);
+  },[loadingUser,loadingQuestion])
   useEffect(() => {
     //Effect callbacks are synchronous to prevent race conditions
     (async () => {
-      setLoading(true);
+      setLoadingQuestion(true);
       let res = await get(`${API_ROOT}question`);
       
       //console.log(res);
       if (res) {
+        setLoadingQuestion(false);
         setLevel(res);
-        setLoading(false);
-        console.log(loading);
+       
         cont.setLevdet({
           level: res.level_number,
           points: res.score,
@@ -178,9 +185,9 @@ function Main(props) {
     
     
     <div id="main">
-  {loading &&   <div ><h1>loading....</h1>
-        </div> }
-    
+      {
+        loadingUser && loadingQuestion && (<div class="lds-facebook"><div></div><div></div><div></div></div>)
+      }
       <div onClick={()=>cont.setIsRule(true)} className={'rules-main position-absolute'}>
         Rules
       </div>

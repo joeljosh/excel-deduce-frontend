@@ -45,6 +45,8 @@ function MainURL(props) {
   const [isAnswer, setAnswer] = useState(false);
   const [isChat, setChat] = useState(false);
   const [isFull, setFull] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(false)
+  const [loadingQuestion, setLoadingQuestion] = useState(false)
   //const [anime, setAnime] = useState(false);
 
   const notice = () => {
@@ -94,9 +96,11 @@ function MainURL(props) {
   const [profile, setProfile] = useState({});
 
   useEffect(() => {
+    setLoadingUser(true)
     get(`${API_ROOT}user_info`).then((res) => {
       //console.log(res.email);
       if (res) {
+        setLoadingUser(false)
         let p = {
           name: res.name,
           email: res.email,
@@ -106,11 +110,18 @@ function MainURL(props) {
     });
   }, []);
 
+  useEffect(()=>{
+    console.log("Question Loader:", loadingQuestion);
+    console.log("User loader:", loadingUser);
+  },[loadingUser,loadingQuestion])
+
   useEffect(() => {
     //Effect callbacks are synchronous to prevent race conditions
     (async () => {
+      setLoadingQuestion(true);
       let resp = await get(`${API_ROOT}question`);
       if (resp) {
+        setLoadingQuestion(false);
         localStorage.setItem("level_number", resp.level_number);
       }
       let res = await get(`${API_ROOT}getlevel?level=${levelParam}`);
@@ -172,6 +183,9 @@ function MainURL(props) {
 
   return (
     <div id="main">
+      {
+        loadingUser && loadingQuestion && (<div class="lds-facebook"><div></div><div></div><div></div></div>)
+      }
       <div onClick={()=>cont.setIsRule(true)} className={'rules-main position-absolute'}>
         Rules
       </div>
