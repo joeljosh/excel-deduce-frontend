@@ -253,8 +253,8 @@ function Main(props) {
         <div id="wall">
           <div className="mascot-hint">
             {
-              (level.hint && level.hints.length > 0) && (
-              //level.hints.length > 0 && (
+              //(level.hint && level.hints.length > 0) && (
+              level.hints.length > 0 && (
                 <div>
                   {isBubble ? (
                     <div
