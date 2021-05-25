@@ -186,8 +186,19 @@ function Main(props) {
     
     <div id="main">
       {
-        loadingUser && loadingQuestion && (<div class="lds-facebook"><div></div><div></div><div></div></div>)
-      }
+        (loadingUser && loadingQuestion)
+          ? ( <div className="loader-main"><div className="loader">
+                <div className="loader__bar"></div>
+                <div className="loader__bar"></div>
+                <div className="loader__bar"></div>
+                <div className="loader__bar"></div>
+                <div className="loader__bar"></div>
+                <div className="loader__ball"></div>
+              </div>
+              </div>
+            )
+          : ( 
+    <div>
       <div onClick={()=>cont.setIsRule(true)} className={'rules-main position-absolute'}>
         Rules
       </div>
@@ -328,8 +339,8 @@ function Main(props) {
         </div>
       </div>
       
-    
-   
+    </div>
+   )}
     </div>
   );
 }
